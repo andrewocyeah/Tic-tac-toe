@@ -28,10 +28,30 @@ def display_board():#Print Each row of the board
 
 display_board();#Show board for reference
 
-def check_victory():
-    s=0#PlaceHolder
+def check_victory(player_letter):
+    for i in range(3):#for each row
+        if tic_tac_toe_board[i] == player_letter*3 : return True #check for a horizontal row
+        #horizontal rows can 1:be tested in a single line, 2. simpler (IDE was complaining about program complexity)
+    
+    for i in range(3):#for each collum
+        valid = True#anomly check
+        for j in range(3): #for each row
+            if tic_tac_toe_board[j][i] != player_letter : #if not letter collum win is not true
+                valid = False
+                break
+        if valid:return True#detect win
 
-
+    valid = True
+    for i in range(3):
+        if tic_tac_toe_board[i][i] != player_letter : valid = False#scan for 0,0 - 2,2 diagonal win
+    if valid:return True
+    
+    valid = True   
+    for i in range(3):
+        if tic_tac_toe_board[i][2-i] != player_letter : valid = False#scan for 0,2 - 2,0 diagonal win
+    if valid:
+        return True
+    return False#no wins detected
 
 def turn(player_letter,user_number):
     xcord = 0
@@ -59,10 +79,16 @@ def turn(player_letter,user_number):
             newRow += tic_tac_toe_board[ycord][xcord];#copy reference form original
         tic_tac_toe_board[ycord] = newRow
     display_board()
+    if check_victory():return True
+    return False
 
 while running:
-    Turn('X',1)
-    Turn('Y',2)
+    if turn('X',1):
+        print("User 1 Victory")
+        running = True
+    else:
+        if turn('Y',2):
+            print("User 3 Victory")
 
 
 
