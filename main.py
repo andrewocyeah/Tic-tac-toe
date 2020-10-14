@@ -75,14 +75,14 @@ def turn(player_letter, user_number):
         while True:
             xcord = int(
                 input("X pos of " + player_letter +
-                      "? [input 0, 1 or 2] (User " + str(user_number) + ")"))
+                      "? [input 1, 2 or 3] (User " + str(user_number) + ")"))-1
             if -1 < xcord < 3:  #in range?
                 break
             print("Thats invalid! Must be a number between 0 and 2")  #do again
         while True:
             ycord = int(
                 input("Y pos of " + player_letter +
-                      "? [input 0, 1 or 2] (User " + str(user_number) + ")"))
+                      "? [input 1, 2 or 3] (User " + str(user_number) + ")"))-1
             if -1 < ycord < 3:  #in range
                 if tic_tac_toe_board[ycord][xcord] == '-':
                     invalid = False  #All is well Proceed to Assignment
